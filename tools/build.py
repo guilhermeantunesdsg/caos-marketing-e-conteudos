@@ -91,9 +91,10 @@ def sect_head(label, title, extra_cls=''):
             f'<h2 class="h2" data-split>{title}</h2></div>')
 
 # ------------------------------------------------------------------ layout
-NAV = [('/', 'Home', 'home'), ('/eventos/', 'Audiovisual para Eventos', 'eventos'),
+NAV = [('/', 'Home', 'home'), ('/marketing/', 'Marketing CAOS', 'marketing'),
+       ('/eventos/', 'Audiovisual para Eventos', 'eventos'),
        ('/casamentos/', 'Audiovisual para Casamentos', 'casamentos'),
-       ('/marketing/', 'Marketing CAOS', 'marketing'), ('/contato/', 'Contato', 'contato')]
+       ('/contato/', 'Contato', 'contato')]
 FRONT_LABEL = {'eventos': 'Eventos', 'casamentos': 'Casamentos', 'marketing': 'Marketing'}
 
 def header(front):
