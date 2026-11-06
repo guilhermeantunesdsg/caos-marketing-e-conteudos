@@ -1,0 +1,17 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": true,
+  "headers": [
+    { "source": "/(.*)", "headers": [
+      { "key": "X-Content-Type-Options", "value": "nosniff" },
+      { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
+      { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" } ] },
+    { "source": "/assets/(.*)", "headers": [ { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" } ] },
+    { "source": "/assets/(css|js)/(.*)", "headers": [ { "key": "Cache-Control", "value": "public, max-age=3600" } ] }
+  ],
+  "redirects": [
+    { "source": "/home", "destination": "/", "permanent": true },
+    { "source": "/evento", "destination": "/eventos/", "permanent": true },
+    { "source": "/casamento", "destination": "/casamentos/", "permanent": true }
+  ]
+}
