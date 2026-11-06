@@ -559,3 +559,13 @@ html.lenis body{overscroll-behavior:none}
 
 .panel--casamentos .frame[data-v] .frame__ph{background:radial-gradient(60% 70% at 70% 25%,rgba(234,103,30,.35),transparent 62%),linear-gradient(160deg,#d9cdbd,#b9a893)}
 .h1,.h2,.h3,.hero__h,.step h3,.row h3,.sol h3,.work__meta h3,.case__txt h3,.hs__meta h3{word-spacing:.08em}
+
+/* celular: hero começa logo abaixo do menu, sem partículas por cima do texto, sem círculo no CTA */
+@media (max-width:820px){
+  .hero:not(.hero--wd):not(.hero--mk){min-height:0;align-items:flex-start;padding:calc(var(--hdr) + 64px) 0 120px}
+  .hero__canvas{display:none}
+  .orb{display:none}
+  .cta__in{gap:0}
+  .vf__meta{bottom:44px}
+}
+@media (max-width:820px){.vf__cross{display:none}}
