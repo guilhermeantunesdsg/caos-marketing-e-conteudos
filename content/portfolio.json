@@ -92,10 +92,10 @@
       "frente": "marketing",
       "tipo": "video",
       "titulo": "Vídeo institucional",
-      "cliente": "Cliente a confirmar",
+      "cliente": "Sertaneja",
       "servico": "Produção de fotos e vídeos",
       "descricao": "Apresentando produtos, equipe e estrutura com qualidade profissional.",
-      "capa": "",
+      "capa": "/assets/img/portfolio/institucional-sertaneja.jpg",
       "destaque": true
     },
     {
