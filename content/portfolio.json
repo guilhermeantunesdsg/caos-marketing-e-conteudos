@@ -69,22 +69,11 @@
       "id": "marketing-case-1",
       "frente": "marketing",
       "tipo": "instagram",
-      "titulo": "Sertão Diamante 2027",
-      "cliente": "Sertão Diamante",
+      "titulo": "Gestão de redes sociais",
+      "cliente": "Clientes CAOS",
       "servico": "Gestão de redes sociais",
-      "descricao": "Identidade visual, posts e vídeos para a campanha de inscrições do Sertão Diamante.",
-      "capa": "/assets/img/portfolio/insta-sertao-diamante.jpg",
-      "destaque": true
-    },
-    {
-      "id": "marketing-fino-trato",
-      "frente": "marketing",
-      "tipo": "instagram",
-      "titulo": "Restaurante Fino Trato",
-      "cliente": "Restaurante Fino Trato",
-      "servico": "Gestão de redes sociais",
-      "descricao": "Fotos, vídeos e artes que valorizam o cardápio e o atendimento do restaurante.",
-      "capa": "/assets/img/portfolio/insta-fino-trato.jpg",
+      "descricao": "Planejamento de conteúdo, artes, vídeos e publicações para o Instagram de cada cliente.",
+      "capa": "/assets/img/portfolio/insta-gestao-redes.jpg",
       "destaque": true
     },
     {
