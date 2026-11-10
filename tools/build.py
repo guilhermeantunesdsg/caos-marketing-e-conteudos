@@ -257,6 +257,10 @@ def works_of(front, only_featured=False):
     ws = [w for w in WORKS if w['frente'] == front]
     return [w for w in ws if w.get('destaque')] if only_featured else ws
 
+def with_capa_first(ws):
+    # trabalhos que já têm foto de capa vêm primeiro (os quadros grandes mostram a imagem real)
+    return sorted(ws, key=lambda w: 0 if w.get('capa') else 1)
+
 def portfolio_grid(front, title, label='Portfólio', note=''):
     theme = 'sec--areia' if front == 'casamentos' else 'sec--dark'
     ws = works_of(front)
@@ -361,7 +365,7 @@ def home():
         <p class="lead">Filmes e fotografias que preservam a história do casal, os detalhes e a emoção de viver esse dia.</p>
         {btn('Conheça nossos casamentos', '/casamentos/', 'dark', 'area_casamentos')}
       </div>
-      <a class="panel__vis panel__vis--serif" href="/casamentos/" data-cursor="Abrir" aria-label="Audiovisual para casamentos">{frame(works_of('casamentos')[0] if works_of('casamentos') else WORKS[0], 'frame--big frame--arch')}<span class="serif q">um sim que<br>atravessa o tempo</span></a>
+      <a class="panel__vis panel__vis--serif" href="/casamentos/" data-cursor="Abrir" aria-label="Audiovisual para casamentos">{frame(with_capa_first(works_of('casamentos') or WORKS)[0], 'frame--big frame--arch')}<span class="serif q">um sim que<br>atravessa o tempo</span></a>
     </div>
   </article>
 
@@ -450,7 +454,7 @@ def casamentos():
            ('Making of, cerimônia e recepção', 'Cobertura organizada conforme a programação e o formato contratado.'),
            ('Vídeos curtos e storymaker', 'Conteúdos para compartilhar a celebração nas redes sociais.')]
     cards = ''.join(f'''<label class="opt" data-opt><input type="checkbox" value="{t}"><span class="opt__box"></span><span class="opt__n serif">{i}</span><h3>{t}</h3><p>{d}</p></label>''' for i, (t, d) in enumerate(pos, 1))
-    hero_ws = (works_of('casamentos') or WORKS)
+    hero_ws = with_capa_first(works_of('casamentos') or WORKS)
     form = mini_form('casamentos-data', 'casamentos', [
         field('Data do casamento', 'data', 'text', 'ex.: 20/08/2027', True), field('Local', 'local', 'text', 'Cidade / espaço', True),
         field('Nomes do casal', 'nome', 'text', 'Quem vai casar?', True)], 'Consultar disponibilidade')
