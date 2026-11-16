@@ -5,13 +5,24 @@
       "id": "aftermovie-evento",
       "frente": "eventos",
       "tipo": "video",
-      "titulo": "Aftermovie de evento",
+      "titulo": "Aftermovie Sertão Diamante",
       "cliente": "Sertão Diamante",
       "servico": "Filme do evento",
       "descricao": "Os principais acontecimentos e a atmosfera do evento em um só filme.",
       "capa": "/assets/img/portfolio/aftermovie-sertao.jpg",
       "youtube": "etzBxqLYMFM",
       "destaque": true
+    },
+    {
+      "id": "aftermovie-fad",
+      "frente": "eventos",
+      "tipo": "video",
+      "titulo": "Aftermovie FAD",
+      "cliente": "FAD",
+      "servico": "Filme do evento",
+      "descricao": "Os principais acontecimentos e a atmosfera do evento em um só filme.",
+      "capa": "/assets/img/portfolio/evento-fad.jpg",
+      "youtube": "pu70f4T4Mtc"
     },
     {
       "id": "evento-corporativo",
@@ -29,11 +40,10 @@
       "frente": "eventos",
       "tipo": "video",
       "titulo": "Storymaker em tempo real",
-      "cliente": "FAD",
+      "cliente": "Cliente a confirmar",
       "servico": "Storymaker",
       "descricao": "Captação, edição e publicação durante o evento.",
-      "capa": "/assets/img/portfolio/evento-fad.jpg",
-      "youtube": "pu70f4T4Mtc"
+      "capa": ""
     },
     {
       "id": "casamento-filme-1",
