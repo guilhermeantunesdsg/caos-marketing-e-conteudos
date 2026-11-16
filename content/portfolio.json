@@ -36,16 +36,6 @@
       "destaque": true
     },
     {
-      "id": "evento-storymaker",
-      "frente": "eventos",
-      "tipo": "video",
-      "titulo": "Storymaker em tempo real",
-      "cliente": "Cliente a confirmar",
-      "servico": "Storymaker",
-      "descricao": "Captação, edição e publicação durante o evento.",
-      "capa": ""
-    },
-    {
       "id": "casamento-filme-1",
       "frente": "casamentos",
       "tipo": "video",
