@@ -6,11 +6,11 @@
       "frente": "eventos",
       "tipo": "video",
       "titulo": "Aftermovie de evento",
-      "cliente": "Cliente a confirmar",
+      "cliente": "Sertão Diamante",
       "servico": "Filme do evento",
       "descricao": "Os principais acontecimentos e a atmosfera do evento em um só filme.",
-      "capa": "",
-      "youtube": "",
+      "capa": "/assets/img/portfolio/aftermovie-sertao.jpg",
+      "youtube": "etzBxqLYMFM",
       "destaque": true
     },
     {
@@ -29,21 +29,23 @@
       "frente": "eventos",
       "tipo": "video",
       "titulo": "Storymaker em tempo real",
-      "cliente": "Cliente a confirmar",
+      "cliente": "FAD",
       "servico": "Storymaker",
       "descricao": "Captação, edição e publicação durante o evento.",
-      "capa": ""
+      "capa": "/assets/img/portfolio/evento-fad.jpg",
+      "youtube": "pu70f4T4Mtc"
     },
     {
       "id": "casamento-filme-1",
       "frente": "casamentos",
       "tipo": "video",
       "titulo": "Filme de casamento",
-      "cliente": "Casal a confirmar",
+      "cliente": "Matheus e Marta",
       "servico": "Filme de casamento",
       "descricao": "Uma narrativa que conecta os momentos e a emoção do dia.",
-      "capa": "",
-      "destaque": true
+      "capa": "/assets/img/portfolio/filme-matheus-marta.jpg",
+      "destaque": true,
+      "youtube": "ptnm9Niu5Jw"
     },
     {
       "id": "casamento-fotos-1",
@@ -60,10 +62,11 @@
       "frente": "casamentos",
       "tipo": "video",
       "titulo": "Pré-wedding",
-      "cliente": "Casal a confirmar",
+      "cliente": "João e Alice",
       "servico": "Pré-wedding",
       "descricao": "A conexão de vocês registrada antes do grande dia.",
-      "capa": "/assets/img/portfolio/casamento-prewedding.jpg"
+      "capa": "/assets/img/portfolio/casamento-prewedding.jpg",
+      "youtube": "e2crN0yd5gg"
     },
     {
       "id": "marketing-case-1",
@@ -85,7 +88,8 @@
       "servico": "Produção de fotos e vídeos",
       "descricao": "Apresentando produtos, equipe e estrutura com qualidade profissional.",
       "capa": "/assets/img/portfolio/institucional-sertaneja.jpg",
-      "destaque": true
+      "destaque": true,
+      "youtube": "MZnS8lA_hLA"
     },
     {
       "id": "marketing-campanha-1",
