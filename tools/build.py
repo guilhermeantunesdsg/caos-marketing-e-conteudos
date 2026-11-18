@@ -97,6 +97,27 @@ NAV = [('/', 'Home', 'home'), ('/marketing/', 'Marketing CAOS', 'marketing'),
        ('/contato/', 'Contato', 'contato')]
 FRONT_LABEL = {'eventos': 'Eventos', 'casamentos': 'Casamentos', 'marketing': 'Marketing'}
 
+
+# ------------------------------------------------------------------ idiomas (bandeiras)
+def _flag_us():
+    h = 20 / 13
+    st = ''.join(f'<rect y="{i*h:.3f}" width="30" height="{h+.02:.3f}" fill="{"#B22234" if i % 2 == 0 else "#fff"}"/>' for i in range(13))
+    stars = ''.join(f'<circle cx="{1.6+c*2.9:.1f}" cy="{1.5+r*2.2:.1f}" r=".62" fill="#fff"/>' for r in range(4) for c in range(4))
+    return f'<svg viewBox="0 0 30 20" aria-hidden="true">{st}<rect width="12.5" height="10.77" fill="#3C3B6E"/>{stars}</svg>'
+FLAGS = [
+    ('pt', 'Português', '<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#009C3B"/><path d="M15 2.4 27.4 10 15 17.6 2.6 10z" fill="#FFDF00"/><circle cx="15" cy="10" r="4.5" fill="#002776"/><path d="M10.7 9.1c3.2-.6 6.3-.2 8.9 1.6" stroke="#fff" stroke-width=".9" fill="none"/></svg>'),
+    ('en', 'English', _flag_us()),
+    ('es', 'Español', '<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#AA151B"/><rect y="5" width="30" height="10" fill="#F1BF00"/></svg>'),
+]
+def lang_switch():
+    b = ''.join(f'<button type="button" class="lang__b" data-l="{k}" aria-label="{n}" title="{n}">{f}</button>' for k, n, f in FLAGS)
+    return f'<div class="lang" role="group" aria-label="Idioma">{b}</div>'
+
+LANG_BOOT = ("<script>(function(){var l='pt';try{var m=location.search.match(/[?&]lang=(en|es|pt)/);"
+             "if(m){l=m[1];localStorage.setItem('caosLang',l)}else{l=localStorage.getItem('caosLang')||'pt'}}catch(e){}"
+             "if(l!=='en'&&l!=='es')l='pt';window.__LANG=l;if(l!=='pt'){document.documentElement.lang=l;"
+             "document.write('<script src=\"/assets/i18n/'+l+'.js?v=__V__\"><\\/script>')}})();</script>")
+
 def header(front):
     logo = 'logo-preto.png' if front == 'casamentos' else 'logo-nevoa.png'
     lab = f'<span class="hdr__front"><i></i>{FRONT_LABEL[front]}</span>' if front in FRONT_LABEL else ''
@@ -105,6 +126,7 @@ def header(front):
     return f'''<header class="hdr" data-hdr>
   <a class="hdr__logo" href="/" aria-label="CAOS · página inicial"><img src="/assets/img/brand/{logo}" alt="CAOS" width="124" height="28"></a>{lab}
   <nav class="hdr__nav" aria-label="Principal">{items}</nav>
+  {lang_switch()}
   <div class="hdr__cta">{cta}</div>
   <button class="burger" type="button" aria-label="Abrir menu" aria-expanded="false" data-burger><span></span><span></span></button>
 </header>
@@ -169,6 +191,7 @@ def page(path, front, title, desc, body, extra_head=''):
 <link rel="preload" href="/assets/fonts/Archivo-100-900-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/fonts/fonts.css">
 <link rel="stylesheet" href="/assets/css/style.css?v={ASSET_V}">
+{LANG_BOOT.replace('__V__', ASSET_V + I18N_V)}
 <script>document.documentElement.classList.add('js');try{{if(sessionStorage.getItem('caosNav')==='1')document.documentElement.classList.add('is-entering')}}catch(e){{}}</script>
 {jsonld(path, FRONT_LABEL.get(front, ''), desc, front)}
 {extra_head}
@@ -193,6 +216,7 @@ def page(path, front, title, desc, body, extra_head=''):
 </div>
 <script type="application/json" id="works-data">{works_json}</script>
 {analytics}
+<script src="/assets/js/i18n.js?v={ASSET_V}" defer></script>
 <script src="/assets/js/lenis.min.js" defer></script>
 <script src="/assets/js/app.js?v={ASSET_V}" defer></script>
 </body>
@@ -647,6 +671,16 @@ def write(path, content):
     d = os.path.dirname(path)
     if d: os.makedirs(d, exist_ok=True)
     open(path, 'w', encoding='utf8').write(content)
+
+# dicionários de tradução (content/i18n/*.json → assets/i18n/*.js)
+I18N_V = ''
+for _l in ('en', 'es'):
+    _p = f'content/i18n/{_l}.json'
+    if os.path.exists(_p):
+        _d = json.load(open(_p, encoding='utf8'))
+        _js = 'window.__I18N=' + json.dumps({k: v for k, v in _d.items() if not k.startswith('_')}, ensure_ascii=False, separators=(',', ':')) + ';'
+        write(f'assets/i18n/{_l}.js', _js)
+        I18N_V += hashlib.md5(_js.encode()).hexdigest()[:4]
 
 PAGES = {'index.html': home(), 'eventos/index.html': eventos(), 'casamentos/index.html': casamentos(),
          'marketing/index.html': marketing(), 'contato/index.html': contato(),

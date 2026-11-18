@@ -16,6 +16,8 @@
     casamentos: 'Olá, CAOS! Vim pelo site e gostaria de consultar a disponibilidade da minha data de casamento.',
     marketing: 'Olá, CAOS! Vim pelo site e gostaria de uma proposta de marketing para a minha empresa.'
   };
+  var _t = w.t || function (x) { return x; };
+  Object.keys(MSG).forEach(function (k) { MSG[k] = _t(MSG[k]); });
   var lenis = null;
   function scrollLock(on) { d.body.style.overflow = on ? 'hidden' : ''; if (lenis) on ? lenis.stop() : lenis.start(); }
 
@@ -49,7 +51,7 @@
     }
     var c = get(); if (c === 'sim') return load(); if (c === 'nao') return;
     var bar = d.createElement('div'); bar.className = 'consent'; bar.setAttribute('role', 'dialog');
-    bar.innerHTML = '<p>Usamos cookies de métricas para entender como o site é usado. Você pode recusar.</p><div><button data-c="sim">Aceitar</button><button data-c="nao">Recusar</button></div>';
+    bar.innerHTML = '<p>' + _t('Usamos cookies de métricas para entender como o site é usado. Você pode recusar.') + '</p><div><button data-c="sim">' + _t('Aceitar') + '</button><button data-c="nao">' + _t('Recusar') + '</button></div>';
     d.body.appendChild(bar);
     bar.addEventListener('click', function (e) { var b = e.target.closest('[data-c]'); if (!b) return; set(b.dataset.c); bar.remove(); if (b.dataset.c === 'sim') load(); });
   })();
@@ -421,7 +423,7 @@
       else if (wk.capa) html = '<img src="' + esc(wk.capa) + '" alt="' + esc(wk.titulo) + '">';
       else html = '<div class="frame" data-v="1"><span class="frame__ph"><img class="sym" src="/assets/img/brand/simbolo.svg" alt="" width="100" height="100"></span><i class="fc tl"></i><i class="fc tr"></i><i class="fc bl"></i><i class="fc br"></i></div>';
       stage.innerHTML = html;
-      cap.innerHTML = '<span>' + esc(wk.cliente) + ' · ' + esc(wk.servico) + '</span><strong>' + esc(wk.titulo) + '</strong><p>' + esc(wk.descricao) + '</p>';
+      cap.innerHTML = '<span>' + esc(_t(wk.cliente)) + ' · ' + esc(_t(wk.servico)) + '</span><strong>' + esc(_t(wk.titulo)) + '</strong><p>' + esc(_t(wk.descricao)) + '</p>';
     }
     function open(id, scope) {
       collect(scope); var i = order.indexOf(id); if (i < 0) return;
@@ -448,28 +450,28 @@
     var cta = $('[data-opt-cta]'), cnt = $('[data-opt-count]');
     var upd = function () {
       var sel = selectedOpts(); cnt.textContent = sel.length;
-      cta.href = 'https://wa.me/' + WA_NUM + '?text=' + encodeURIComponent(MSG.casamentos + (sel.length ? ' Tenho interesse em: ' + sel.join(', ') + '.' : ''));
+      cta.href = 'https://wa.me/' + WA_NUM + '?text=' + encodeURIComponent(MSG.casamentos + (sel.length ? ' ' + _t('Tenho interesse em:') + ' ' + sel.join(', ') + '.' : ''));
     };
     opts.addEventListener('change', upd); upd();
   }
 
   /* ---------- formulários → WhatsApp + registro no Netlify ---------- */
   var svc = $('[data-service]'), extra = $('[data-extra]');
-  if (svc && extra) svc.addEventListener('change', function () { extra.hidden = !/Eventos|Casamentos/.test(svc.value); });
+  if (svc && extra) svc.addEventListener('change', function () { extra.hidden = !(svc.selectedIndex === 1 || svc.selectedIndex === 2); });
   $$('.js-form').forEach(function (f) {
     f.addEventListener('submit', function (e) {
       e.preventDefault(); if (!f.checkValidity()) { f.reportValidity(); return; }
       var fd = new FormData(f), g = function (k) { return (fd.get(k) || '').toString().trim(); };
       var lines = [MSG[f.dataset.wa] || MSG.geral, ''];
-      [['nome', 'Nome'], ['telefone', 'Telefone'], ['email', 'E-mail'], ['servico', 'Serviço de interesse'], ['data', 'Data'], ['local', 'Local'], ['mensagem', 'Mensagem']].forEach(function (m) { if (g(m[0])) lines.push(m[1] + ': ' + g(m[0])); });
-      var sel = selectedOpts(); if (sel.length && f.dataset.wa === 'casamentos') lines.push('Interesse em: ' + sel.join(', '));
+      [['nome', 'Nome'], ['telefone', 'Telefone'], ['email', 'E-mail'], ['servico', 'Serviço de interesse'], ['data', 'Data'], ['local', 'Local'], ['mensagem', 'Mensagem']].forEach(function (m) { if (g(m[0])) lines.push(_t(m[1]) + ': ' + g(m[0])); });
+      var sel = selectedOpts(); if (sel.length && f.dataset.wa === 'casamentos') lines.push(_t('Interesse em:') + ' ' + sel.join(', '));
       w.open('https://wa.me/' + WA_NUM + '?text=' + encodeURIComponent(lines.join('\n')), '_blank', 'noopener');
       track(f.dataset.track || 'form', { pagina: location.pathname });
       if (!/^(localhost|127\.|0\.0\.0\.0)/.test(location.hostname)) {
         try { fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams(fd).toString(), keepalive: true }); } catch (er) {}
       }
       var b = $('button[type=submit] .btn__t', f);
-      if (b) { var old = b.textContent; b.textContent = 'Abrindo o WhatsApp…'; setTimeout(function () { b.textContent = old; }, 4500); }
+      if (b) { var old = b.textContent; b.textContent = _t('Abrindo o WhatsApp…'); setTimeout(function () { b.textContent = old; }, 4500); }
       if (f.name === 'contato') setTimeout(function () { location.href = '/contato/obrigado/'; }, 900);
     });
   });
