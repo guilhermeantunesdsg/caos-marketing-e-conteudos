@@ -25,17 +25,6 @@
       "youtube": "pu70f4T4Mtc"
     },
     {
-      "id": "evento-corporativo",
-      "frente": "eventos",
-      "tipo": "foto",
-      "titulo": "Cobertura fotográfica",
-      "cliente": "Cliente a confirmar",
-      "servico": "Fotografia de evento",
-      "descricao": "Público, atrações, estrutura e bastidores em uma galeria completa.",
-      "capa": "",
-      "destaque": true
-    },
-    {
       "id": "casamento-filme-1",
       "frente": "casamentos",
       "tipo": "video",
